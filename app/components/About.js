@@ -46,7 +46,7 @@ const About = () => {
             <img
               src="/images/CEO.png"
               alt="Team Member"
-              className="rounded-full w-[50%] mx-auto mb-4"
+              className="rounded-full w-[30%] mx-auto mb-4"
             />
             <h3 className="text-xl font-semibold mb-2">Shamal Ekanayaka</h3>
             <p className="text-gray-600">Co-Founder & CEO</p>
@@ -56,7 +56,7 @@ const About = () => {
             <img
               src="/images/Lead.png"
               alt="Team Member"
-              className="rounded-full w-[50%] mx-auto mb-4"
+              className="rounded-full w-[30%] mx-auto mb-4"
             />
             <h3 className="text-xl font-semibold mb-2">Themiya Induwara</h3>
             <p className="text-gray-600">Co-Founder & CTO</p>
