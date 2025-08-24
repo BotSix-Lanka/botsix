@@ -10,7 +10,7 @@ const About = () => {
         <h1>Team Work Makes the Dream Work</h1>
       </div>
 
-      <div className="flex flex-row justify-between gap-10">
+      <div className="flex flex-col md:flex-row justify-between gap-10">
         <section
           data-aos="fade-right"
           className="mb-10 bg-[#274393] p-10 rounded-lg text-white p-10"

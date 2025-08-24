@@ -1,20 +1,32 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "../contexts/ThemeContext";
 
 const Header = () => {
   const { theme, toggleTheme } = useTheme();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleToggleTheme = () => {
     console.log("Theme toggle clicked, current theme:", theme);
     toggleTheme();
   };
 
+  const handleToggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleMobileMenuClick = (href) => {
+    // Close menu when clicking on hash links
+    if (href.startsWith("#")) {
+      setIsMenuOpen(false);
+    }
+  };
+
   return (
-    <div className="header sticky px-54 top-0 bg-white text-gray-900 z-1050 flex flex-row justify-between items-center p-5">
+    <div className="header sticky px-5 sm:px-10 top-0 bg-white text-gray-900 z-1050 flex flex-row justify-between items-center p-5">
       <div>
         <Link href={"/"}>
           <Image
@@ -26,7 +38,9 @@ const Header = () => {
           />
         </Link>
       </div>
-      <div className="flex flex-row gap-5" data-aos="fade-up">
+
+      {/* Desktop Menu */}
+      <div className="hidden sm:flex flex-row gap-5" data-aos="fade-up">
         <Link className="hover:text-[#274393] transition" href="#services">
           Services
         </Link>
@@ -36,46 +50,141 @@ const Header = () => {
         <Link className="hover:text-[#274393] transition" href="#about">
           About Us
         </Link>
-        {/* <Link className="hover:text-[#274393] transition" href="#blog">
-          Blog
-        </Link> */}
         <Link className="hover:text-[#274393] transition" href="/projects">
           Projects
         </Link>
       </div>
-      <div className="flex flex-row gap-3 items-center" data-aos="fade-right">
-        {/* <button
-          onClick={handleToggleTheme}
-          className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-          aria-label="Toggle dark mode"
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div
+          style={{
+            position: "absolute",
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100vh",
+            backgroundColor: "white",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          }}
         >
-          {theme === "dark" ? (
-            <svg
-              className="w-5 h-5 text-yellow-500"
-              fill="currentColor"
-              viewBox="0 0 20 20"
+          <Link
+            href="#services"
+            className="hover:text-[#274393] transition"
+            style={{ marginBottom: "15px" }}
+            onClick={() => handleMobileMenuClick("#services")}
+          >
+            Services
+          </Link>
+          <Link
+            href="#clientsays"
+            className="hover:text-[#274393] transition"
+            style={{ marginBottom: "15px" }}
+            onClick={() => handleMobileMenuClick("#clientsays")}
+          >
+            Client Says
+          </Link>
+          <Link
+            href="#about"
+            className="hover:text-[#274393] transition"
+            style={{ marginBottom: "15px" }}
+            onClick={() => handleMobileMenuClick("#about")}
+          >
+            About Us
+          </Link>
+          <Link
+            href="/projects"
+            className="hover:text-[#274393] transition"
+            style={{ marginBottom: "15px" }}
+            onClick={() => handleMobileMenuClick("/projects")}
+          >
+            Projects
+          </Link>
+          <a href={"/contact"}>
+            <button
+              className="bg-[#274393] text-white px-4 py-2 rounded"
+              onClick={() => handleMobileMenuClick("/contact")}
             >
-              <path
-                fillRule="evenodd"
-                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                clipRule="evenodd"
-              />
-            </svg>
-          ) : (
-            <svg
-              className="w-5 h-5 text-gray-700"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-            </svg>
-          )}
-        </button> */}
+              Contact Us
+            </button>
+          </a>
+
+          {/* Close Button */}
+          <button
+            onClick={handleToggleMenu}
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "20px",
+              background: "none",
+              border: "none",
+              fontSize: "30px",
+              color: "black",
+              cursor: "pointer",
+            }}
+          >
+            &times;
+          </button>
+        </div>
+      )}
+
+      <div className="flex flex-row gap-3 items-center" data-aos="fade-right">
         <a className="cursor:pointer" href={"/contact"}>
-          <button className="bg-[#274393] cursor:pointer  text-white px-4 py-2 rounded">
+          <button className="bg-[#274393] cursor:pointer text-white px-4 py-2 rounded">
             Contact Us
           </button>
         </a>
+      </div>
+
+      {/* Mobile Menu Burger Icon */}
+      <div className="sm:hidden flex items-center gap-5">
+        <button onClick={handleToggleMenu} style={{ cursor: "pointer" }}>
+          {/* Burger Icon */}
+          <div
+            style={{
+              width: "20px",
+              height: "20px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "center",
+              transition: "transform 0.3s ease-in-out",
+            }}
+          >
+            <div
+              style={{
+                width: "100%",
+                height: "4px",
+                backgroundColor: "black",
+                transform: isMenuOpen ? "rotate(45deg)" : "rotate(0deg)",
+                transition: "transform 0.3s ease-in-out",
+              }}
+            ></div>
+            <div
+              style={{
+                width: "100%",
+                height: "4px",
+                backgroundColor: "black",
+                opacity: isMenuOpen ? "0" : "1",
+                transition: "opacity 0.3s ease-in-out",
+              }}
+            ></div>
+            <div
+              style={{
+                width: "100%",
+                height: "4px",
+                backgroundColor: "black",
+                transform: isMenuOpen ? "rotate(-45deg)" : "rotate(0deg)",
+                transition: "transform 0.3s ease-in-out",
+              }}
+            ></div>
+          </div>
+        </button>
       </div>
     </div>
   );

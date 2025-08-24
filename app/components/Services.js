@@ -12,7 +12,7 @@ const Services = () => {
 
       <div className="flex flex-col gap-20 mt-16">
         {/* Mobile App Development */}
-        <div className="flex flex-row gap-20 items-center">
+        <div className="flex flex-col md:flex-row gap-20 items-center">
           <Image
             data-aos="fade-left"
             src="/images/mobile.png"
@@ -53,7 +53,7 @@ const Services = () => {
         </div>
 
         {/* Web App Development */}
-        <div className="flex flex-row gap-20 items-center">
+        <div className="flex flex-col md:flex-row gap-20 items-center">
           <div className="flex flex-col gap-8">
             <div
               data-aos="fade-right"
@@ -94,7 +94,7 @@ const Services = () => {
         </div>
 
         {/* Cloud Services */}
-        <div className="flex flex-row gap-20 items-center">
+        <div className="flex flex-col md:flex-row gap-20 items-center">
           <Image
             data-aos="fade-left"
             src="/images/cloud.png"
@@ -135,7 +135,7 @@ const Services = () => {
         </div>
 
         {/* Graphics & Design Services */}
-        <div className="flex flex-row gap-20 items-center">
+        <div className="flex flex-col md:flex-row gap-20 items-center">
           <div className="flex flex-col gap-8">
             <div
               data-aos="fade-right"
