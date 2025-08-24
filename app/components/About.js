@@ -7,7 +7,7 @@ const About = () => {
         data-aos="fade-up"
         className="border-l-5 mb-10 border-[#274393] text-3xl font-bold pl-4 mb-6"
       >
-        <h1>Team Work Makes the Dream Work</h1>
+        <h1 className="text-black">Team Work Makes the Dream Work</h1>
       </div>
 
       <div className="flex flex-col md:flex-row justify-between gap-10">
@@ -38,7 +38,7 @@ const About = () => {
         </section>
       </div>
 
-      <section data-aos="fade-up" className="mb-10">
+      <section data-aos="fade-up" className="mb-10 text-black">
         <h2 className="text-2xl font-semibold mb-4">Team Members</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
           {/* Team Member 1 */}
